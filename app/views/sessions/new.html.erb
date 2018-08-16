@@ -2,8 +2,8 @@
 
 <%= form_tag '/login' do %>
 
-  <% if flash[:notice] %>
-    <div class="notice"><%= flash[:notice] %></div>
+  <% if flash[:invalid] %>
+    <div class="notice"><%= flash[:invalid] %></div>
   <% end %>
 
   <div class="form-group">
