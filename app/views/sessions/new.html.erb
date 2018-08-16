@@ -1,0 +1,21 @@
+<h1>Login</h1>
+
+<%= form_tag '/login' do %>
+
+  <% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <%= text_field_tag :email, '', class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <%= password_field_tag :password, '',class: 'form-control' %>
+  </div>
+
+  <%= submit_tag 'Login', class: 'btn btn-primary' %>
+
+<% end %>
