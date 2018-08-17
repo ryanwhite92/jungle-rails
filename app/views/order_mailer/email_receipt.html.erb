@@ -1,0 +1,49 @@
+<h1>Jungle - Receipt for Order <%= @order.id %></h1>
+<h2>Order summary:</h2>
+
+<table cellpadding="15">
+  <thead>
+    <tr>
+      <th colspan="2">Product</th>
+      <th>Unit Price</th>
+      <th>Quantity</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order_total = 0 %>
+    <% @order.line_items.each do |item| %>
+      <% if product = Product.find_by(id: item.product_id) %>
+        <% item_total = product.price * item.quantity %>
+        <% @order_total += item_total %>
+
+        <tr>
+          <td>
+            <%= image_tag product.image.tiny %>
+          </td>
+          <td>
+            <strong><%= product.name %></strong>
+          </td>
+          <td>
+            <%= product.price %>
+          </td>
+          <td>
+            <%= item.quantity %>
+          </td>
+          <td>
+            <%= item_total %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3"></td>
+      <td><strong>TOTAL:</strong></td>
+      <td>
+        <strong><%= @order_total %></strong>
+      </td>
+    </tr>
+  </tfoot>
+</table>
