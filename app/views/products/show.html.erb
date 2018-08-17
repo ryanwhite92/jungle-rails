@@ -26,6 +26,29 @@
       </div>
     </div>
 
+    <% if @product.reviews.any? %>
+      <div class="row">
+        <br>
+
+        <% @product.reviews.each do |review| %>
+        <% user = User.find_by(id: review.user_id) %>
+
+          <dl class="dl-horizontal">
+            <dt><%= user.email %></dt>
+            <dd></dd>
+            <dt>Rating:</dt>
+            <dd><%= review.rating %>/5</dd>
+            <dt>Description:</dt>
+            <dd>
+              <%= review.description %>
+            </dd>
+          </dl>
+
+        <% end %>
+
+      </div>
+    <% end %>
+
   </article>
 
 </section>
