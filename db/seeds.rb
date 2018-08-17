@@ -132,5 +132,31 @@ cat3.products.create!({
   price: 2_483.75
 })
 
+# USERS
+User.destroy_all
+
+puts "Recreating users ..."
+
+user1 = User.create!({first_name: 'donny', last_name: 'darko', email: 'donnyd@lhl.ca', password: 'fluffy'})
+user2 = User.create!({first_name: 'sammy', last_name: 'jazzhands', email: 'jazzhands@lhl.ca', password: 'bunny'})
+
+# REVIEWS
+
+Review.destroy_all
+
+puts "Recreating Reviews ..."
+
+cat1.products[0].reviews.create!({
+  rating: 4,
+  description: 'great product bro',
+  user_id: 1
+})
+
+user2.reviews.create!({
+  rating: 5,
+  description: 'love this product',
+  product_id: 1
+})
+
 
 puts "DONE!"
