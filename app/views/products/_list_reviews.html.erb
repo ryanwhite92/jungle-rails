@@ -1,6 +1,8 @@
 <% @reviews.each do |review| %>
 
   <dl class="dl-horizontal">
+    <dt>User:</dt>
+    <dd><%= User.find_by(id: review.user_id).first_name %></dd>
     <dt>Rating:</dt>
     <dd><%= review.rating %>/5</dd>
     <dt>Description:</dt>
