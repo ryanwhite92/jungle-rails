@@ -120,7 +120,7 @@ cat3.products.create!({
   name:  'Electric Chair',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('furniture2.jpg'),
-  quantity: 2,
+  quantity: 0,
   price: 987.65
 })
 
@@ -137,8 +137,9 @@ User.destroy_all
 
 puts "Recreating users ..."
 
-user1 = User.create!({first_name: 'donny', last_name: 'darko', email: 'donnyd@lhl.ca', password: 'fluffy'})
-user2 = User.create!({first_name: 'sammy', last_name: 'jazzhands', email: 'jazzhands@lhl.ca', password: 'bunny'})
+user1 = User.create!({first_name: 'Donny', last_name: 'Darko', email: 'donnyd@example.com', password: 'fluffy'})
+user2 = User.create!({first_name: 'Terry', last_name: 'Jeffards', email: 'terryj@example.com', password: 'bunny'})
+user3 = User.create!({first_name: 'Jenny', last_name: 'Jazzhands', email: 'jazzhands@example.com', password: 'guest'})
 
 # REVIEWS
 
@@ -148,14 +149,26 @@ puts "Recreating Reviews ..."
 
 cat1.products[0].reviews.create!({
   rating: 4,
-  description: 'great product bro',
+  description: 'Great shirt bro',
   user_id: 1
 })
 
 cat1.products[0].reviews.create!({
   rating: 5,
-  description: 'love this product',
+  description: 'Shirts a bit tight. Terry loves mango yogurt',
   user_id: 2
+})
+
+cat3.products[2].reviews.create!({
+  rating: 3,
+  description: 'This is a strange bookshelf...',
+  user_id: 1
+})
+
+cat3.products[2].reviews.create!({
+  rating: 4,
+  description: 'It matches my optimal sleeping bed!',
+  user_id: 3
 })
 
 
