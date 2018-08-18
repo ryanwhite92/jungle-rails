@@ -28,9 +28,20 @@
 
     <div class="row">
 
-      <%= form_for [@product, Review.new] do |form| %>
+      <%= form_for [@product, @review] do |form| %>
 
         <div class="form-group">
+
+          <% if form.object.errors.any? %>
+            <div class="alert alert-danger">
+            <ul>
+              <% form.object.errors.full_messages.each do |error| %>
+                <li><%= error %></li>
+              <% end %>
+            </ul>
+          </div>
+          <% end %>
+
           <%= form.label :rating %>
           <%= form.select(:rating) do %>
             <% [[1,1],[2,2],[3,3],[4,4],[5,5]].each do |n| %>
@@ -50,16 +61,13 @@
 
     </div>
 
-    <% if @product.reviews.any? %>
+    <% if @reviews %>
       <div class="row">
         <br>
 
-        <% @product.reviews.each do |review| %>
-        <% user = User.find_by(id: review.user_id) %>
+        <% @reviews.each do |review| %>
 
           <dl class="dl-horizontal">
-            <dt><%= user.email %></dt>
-            <dd></dd>
             <dt>Rating:</dt>
             <dd><%= review.rating %>/5</dd>
             <dt>Description:</dt>
