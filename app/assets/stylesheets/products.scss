@@ -38,7 +38,7 @@ main section.categories-show {
         bottom: 0;
         left:   0;
         background-color: #EEE;
-        padding: 15px;
+        padding: 10px;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
         width: 100%;
@@ -69,12 +69,24 @@ main section.categories-show {
         font-size: 0.8em;
       }
 
+      aside.rating {
+        display: none;
+        padding-bottom: 10px;
+        color: #000;
+        font-size: 1em;
+        text-align: center;
+      }
+
       &:hover {
 
         border-color: #999;
 
         footer {
           opacity: 1.0;
+        }
+
+        aside.rating {
+          display: block;
         }
       }
 

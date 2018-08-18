@@ -9,6 +9,14 @@
     <%= product.description %>
   </p>
   <footer class="actions">
+
+    <% if product.reviews.count > 0 %>
+    <% count = product.reviews.count %>
+    <% total = product.reviews.reduce(0) { |sum, review| sum + review.rating.to_f } %>
+    <% average = total / count %>
+    <aside class="rating">Overall rating <%= number_with_precision(average, { precision: 1 }) %> / 5.0 (<%= count %>)</aside>
+    <% end %>
+
     <%= link_to add_item_cart_path(product_id: product.id), class: 'btn btn-primary', method: :put do %>
       <%= fa_icon "shopping-cart", text: 'Add' %>
     <% end %>
