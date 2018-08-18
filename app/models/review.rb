@@ -2,10 +2,8 @@ class Review < ActiveRecord::Base
   belongs_to :product
   belongs_to :user
 
-  validates_associated :user
-  validates_associated :product
+  validates :user_id, presence: { message: "must be logged in" }
+  validates :product_id, presence: true
   validates :description, presence: true
-  validates :rating, numericality: { only_integer: true,
-                                    greater_than_or_equal_to: 1,
-                                    less_than_or_equal_to: 5 }
+  validates :rating, presence: true
 end
