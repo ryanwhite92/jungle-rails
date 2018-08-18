@@ -83,6 +83,12 @@
             <dd>
               <%= review.description %>
             </dd>
+            <% if current_user && current_user.id == review.user_id %>
+              <dt></dt>
+              <dd><%= link_to 'Delete Review',  product_review_path(product_id: @product[:id], id: review[:id]),
+                                                method: :delete,
+                                                data: { confirm: 'Are you sure?' } %></dd>
+            <% end %>
           </dl>
 
         <% end %>
