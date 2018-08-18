@@ -152,10 +152,10 @@ cat1.products[0].reviews.create!({
   user_id: 1
 })
 
-user2.reviews.create!({
+cat1.products[0].reviews.create!({
   rating: 5,
   description: 'love this product',
-  product_id: 1
+  user_id: 2
 })
 
 
