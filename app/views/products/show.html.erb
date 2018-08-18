@@ -26,8 +26,8 @@
       </div>
     </div>
 
-    <h2>Reviews</h2>
     <div class="row">
+      <h2>Reviews</h2>
 
       <% if flash[:error] %>
         <div class="alert alert-danger">
@@ -37,13 +37,14 @@
 
       <% if current_user %>
         <%= render 'products/review_form' %>
+      <% else %>
+        <p><strong><%= link_to 'Login', login_path %></strong> to leave a review</p>
       <% end %>
 
     </div>
 
     <div class="row">
       <% if @reviews %>
-        <br>
         <%= render 'products/list_reviews' %>
       <% end %>
     </div>
