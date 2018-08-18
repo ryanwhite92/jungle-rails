@@ -36,36 +36,7 @@
       <% end %>
 
       <% if current_user %>
-        <%= form_for [@product, @review] do |form| %>
-
-          <div class="form-group">
-
-            <% if form.object.errors.any? %>
-              <div class="alert alert-danger">
-              <ul>
-                <% form.object.errors.full_messages.each do |error| %>
-                  <li><%= error %></li>
-                <% end %>
-              </ul>
-            </div>
-            <% end %>
-
-            <%= form.label :rating %>
-            <%= form.select(:rating) do %>
-              <% [[1,1],[2,2],[3,3],[4,4],[5,5]].each do |n| %>
-                <%= content_tag(:option, n.first, value: n.last) %>
-              <% end %>
-            <% end %>
-          </div>
-
-          <div class="form-group">
-            <%= form.label :description %>
-            <%= form.text_area :description, class: "form-control" %>
-          </div>
-
-          <%= form.submit 'Submit', class: "btn btn-primary" %>
-
-        <% end %>
+        <%= render 'products/review_form' %>
       <% end %>
 
     </div>
@@ -73,26 +44,7 @@
     <div class="row">
       <% if @reviews %>
         <br>
-
-        <% @reviews.each do |review| %>
-
-          <dl class="dl-horizontal">
-            <dt>Rating:</dt>
-            <dd><%= review.rating %>/5</dd>
-            <dt>Description:</dt>
-            <dd>
-              <%= review.description %>
-            </dd>
-            <% if current_user && current_user.id == review.user_id %>
-              <dt></dt>
-              <dd><%= link_to 'Delete Review',  product_review_path(product_id: @product[:id], id: review[:id]),
-                                                method: :delete,
-                                                data: { confirm: 'Are you sure?' } %></dd>
-            <% end %>
-          </dl>
-
-        <% end %>
-
+        <%= render 'products/list_reviews' %>
       <% end %>
     </div>
 
