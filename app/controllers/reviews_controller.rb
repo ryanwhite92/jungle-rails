@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
   def create
     @product = Product.find(params[:product_id])
-    @reviews = Review.where(product_id: params[:product_id])
+    @reviews = Review.where(product_id: params[:product_id]).order(created_at: :desc)
 
     @review = @product.reviews.new(review_params)
     @review.user = current_user
