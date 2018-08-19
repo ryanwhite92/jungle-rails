@@ -1,6 +1,4 @@
-class Admin::DashboardController < ApplicationController
-  before_action :http_basic_authenticate
-
+class Admin::DashboardController < Admin::BaseController
   def show
   end
 end
