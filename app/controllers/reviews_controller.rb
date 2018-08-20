@@ -10,7 +10,7 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to product_path(@product)
     else
-      render 'products/show'
+      redirect_to :back
     end
   end
 
