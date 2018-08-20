@@ -49,5 +49,23 @@ RSpec.describe User, type: :model do
         expect(user.email).to_not eql(user2.email)
       end
     end
+
+    context 'must be created with first and last name fields' do
+      before { user.update(password: 'robot', password_confirmation: 'robot') }
+
+      it 'should be valid if given first and last name' do
+        expect(user).to be_valid
+      end
+
+      it 'should be invalid if first name field is blank' do
+        user.update(first_name: nil)
+        expect(user).to_not be_valid
+      end
+
+      it 'should be invalid if last name field is blank' do
+        user.update(last_name: nil)
+        expect(user).to_not be_valid
+      end
+    end
   end
 end
