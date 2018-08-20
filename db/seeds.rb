@@ -137,9 +137,9 @@ User.destroy_all
 
 puts "Recreating users ..."
 
-user1 = User.create!({first_name: 'Donny', last_name: 'Darko', email: 'donnyd@example.com', password: 'fluffy'})
-user2 = User.create!({first_name: 'Terry', last_name: 'Jeffards', email: 'terryj@example.com', password: 'bunny'})
-user3 = User.create!({first_name: 'Jenny', last_name: 'Jazzhands', email: 'jazzhands@example.com', password: 'guest'})
+user1 = User.create!({first_name: 'Donny', last_name: 'Darko', email: 'donnyd@example.com', password: 'fluffy123', password_confirmation: 'fluffy123'})
+user2 = User.create!({first_name: 'Terry', last_name: 'Jeffards', email: 'terryj@example.com', password: 'bunny123', password_confirmation: 'bunny123'})
+user3 = User.create!({first_name: 'Jenny', last_name: 'Jazzhands', email: 'jazzhands@example.com', password: 'guest123', password_confirmation: 'guest123'})
 
 # REVIEWS
 
