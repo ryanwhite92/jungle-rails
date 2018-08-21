@@ -70,4 +70,27 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe '.authenticate_with_credentials' do
+    let(:user) { User.new(first_name: 'First', last_name: 'Last', email: 'email@example.com', password: 'guest1234', password_confirmation: 'guest1234') }
+    before { user.save }
+
+    context 'given an email and password' do
+      it 'should authenticate the user if valid email and password' do
+        user2 = User.authenticate_with_credentials('email@example.com', 'guest1234')
+        expect(user2).to eql(user)
+      end
+
+      it 'should not authenticate the user if invalid email' do
+        user2 = User.authenticate_with_credentials('admin@example.com', 'guest1234')
+        expect(user2).to_not eql(user)
+      end
+
+      it 'should not authenticate the user if invalid password' do
+        user2 = User.authenticate_with_credentials('email@example.com', 'guest')
+        expect(user2).to_not eql(user)
+      end
+    end
+
+  end
 end
