@@ -92,5 +92,20 @@ RSpec.describe User, type: :model do
       end
     end
 
+    context 'if a visitor types spaces before/after their email' do
+      it 'should be authenticated successfully' do
+        email = '  email@example.com '
+        user2 = User.authenticate_with_credentials(email, 'guest1234')
+        expect(user2).to eql(user)
+      end
+    end
+
+    context 'if a visitor types the wrong case for their email' do
+      it 'should be authenticated successfully' do
+        email = 'EMaiL@eXampLe.cOm'
+        user2 = User.authenticate_with_credentials(email, 'guest1234')
+        expect(user2).to eql(user)
+      end
+    end
   end
 end
