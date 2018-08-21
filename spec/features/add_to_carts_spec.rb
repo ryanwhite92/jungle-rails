@@ -18,7 +18,13 @@ RSpec.feature "Users click add to cart button", type: :feature, js: true do
   scenario 'Cart increases by one' do
     visit root_path
 
-    save_screenshot 'output.png'
+    cart = find("a[href='#{cart_path}']")
+
+    expect(cart.text).to have_content('My Cart (0)')
+
+    first('article.product').click_on('Add')
+
+    expect(cart.text).to have_content('My Cart (1)')
   end
 
 end
