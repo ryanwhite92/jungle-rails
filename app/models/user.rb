@@ -9,9 +9,18 @@ class User < ActiveRecord::Base
   validates :last_name, presence: true
   validates :email,
             presence: true,
-            uniqueness: { case_sensitive: false },
-            format: { with: VALID_EMAIL_REGEX }
+            uniqueness: { case_sensitive: false }
+            # format: { with: VALID_EMAIL_REGEX }
   validates :password, presence: true, length: { minimum: 8 }
   validates :password_confirmation, presence: true
 
+  private
+  def self.authenticate_with_credentials(email, password)
+    user = User.find_by(email: email)
+    if user && user.authenticate(password)
+      user
+    else
+      nil
+    end
+  end
 end
