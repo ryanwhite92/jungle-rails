@@ -4,13 +4,13 @@ RSpec.describe Order, type: :model do
   describe 'After creation' do
     before :each do
       drones = Category.new(name: 'Drones')
-      @product1 = Product.create!(name: 'Stealth Drone', price: 1500, quantity: 8, category: drones)
-      @product2 = Product.create!(name: 'Camera Drone', price: 800, quantity: 22, category: drones)
-      @product3 = Product.create!(name: 'Mini Drone', price: 500, quantity: 18, category: drones)
+      @product1 = Product.create!(id: 1, name: 'Stealth Drone', price: 1500, quantity: 8, category: drones)
+      @product2 = Product.create!(id: 2, name: 'Camera Drone', price: 800, quantity: 22, category: drones)
+      @product3 = Product.create!(id: 3, name: 'Mini Drone', price: 500, quantity: 18, category: drones)
     end
 
     it 'deducts quantity from products based on their line item quantities' do
-      @order = Order.new(email: 'email@example.com', stripe_charge_id: '1')
+      @order = Order.new(stripe_charge_id: 1)
       @order.line_items.new(product: @product1, quantity: 1, item_price: @product1.price, total_price: @product1.price * 1)
       @order.line_items.new(product: @product2, quantity: 2, item_price: @product2.price, total_price: @product2.price * 2)
       @order.total_cents = @order.line_items.reduce(0) { |sum, i| sum + i.total_price }
@@ -24,7 +24,7 @@ RSpec.describe Order, type: :model do
 
     end
 
-    xit 'does not deduct quantity from products that are not in the order' do
+    it 'does not deduct quantity from products that are not in the order' do
       @order = Order.new(email: 'email@example.com', stripe_charge_id: '1')
       @order.line_items.new(product: @product1, quantity: 1, item_price: @product1.price, total_price: @product1.price * 1)
       @order.line_items.new(product: @product2, quantity: 2, item_price: @product2.price, total_price: @product2.price * 2)
