@@ -12,9 +12,8 @@ class Order < ActiveRecord::Base
   private
   def adjust_quantity(order)
     order.line_items.each do |item|
-      product = Product.find_by(id: item.product.id)
-      quantity = product.quantity - item.quantity
-      product.update(quantity: quantity)
+      new_quantity = item.product.quantity - item.quantity
+      item.product.update(quantity: new_quantity)
     end
   end
 end
