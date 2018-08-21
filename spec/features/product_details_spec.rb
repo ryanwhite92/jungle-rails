@@ -19,6 +19,9 @@ RSpec.feature "Visitors navigates to product detail page", type: :feature, js: t
   scenario 'They see product detail' do
     visit root_path
 
-    save_screenshot 'output.png'
+    first('article.product').click_on('Details')
+
+    # First product on page was created last
+    expect(page).to have_content("#{@category.name} » #{@category.products.last.name}")
   end
 end
